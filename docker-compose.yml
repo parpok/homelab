@@ -1,6 +1,6 @@
 version: 2
 
-  services:
+services:
     syncthing:
       image: lscr.io/linuxserver/syncthing:latest
       container_name: syncthing
@@ -39,17 +39,17 @@ version: 2
         - "host.docker.internal:host-gateway"
 
     homeassistant:
-    image: lscr.io/linuxserver/homeassistant:latest
-    container_name: homeassistant
-    network_mode: host
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Warsaw
-    volumes:
-      - /data/podman/hassio/config
-    ports:
-      - 8123:8123 #optional
-    devices:
-      - /data/podman/hassio/device #optional
-    restart: unless-stopped
+      image: lscr.io/linuxserver/homeassistant:latest
+      container_name: homeassistant
+      network_mode: host
+      environment:
+        - PUID=1000
+        - PGID=1000
+        - TZ=Europe/Warsaw
+      volumes:
+        - /data/podman/hassio/config
+      ports:
+        - 8123:8123 #optional
+      devices:
+        - /data/podman/hassio/device #optional
+      restart: unless-stopped
