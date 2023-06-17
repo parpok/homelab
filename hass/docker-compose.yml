@@ -9,7 +9,9 @@ services:
       - PGID=1000
       - TZ=Europe/Warsaw
     volumes:
-      -  /data/podman/hassio/config
+      -  /data/podman/hassio/config:/config
     ports:
       - 8123:8123 #optional
+    devices:
+      - /data/podman/hassio/device:/path/to/device  #optional
     restart: unless-stopped
