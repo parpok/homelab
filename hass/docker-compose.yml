@@ -9,10 +9,10 @@ services:
       - PGID=1000
       - TZ=Europe/Warsaw
     volumes:
-      -  /data/podman/hassio/config:/config
+      -  /home/jenot/hass/config:/config
     ports:
       - 8123:8123 #optional
-      
+
     labels:
     - "io.containers.autoupdate=registry"
     restart: unless-stopped
