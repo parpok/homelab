@@ -12,6 +12,7 @@ services:
       -  /data/podman/hassio/config:/config
     ports:
       - 8123:8123 #optional
-    devices:
-      - /data/podman/hassio/device:/path/to/device  #optional
+      
+    labels:
+    - "io.containers.autoupdate=registry"
     restart: unless-stopped
