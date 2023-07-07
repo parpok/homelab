@@ -30,6 +30,8 @@ services:
       - PGID=1000
       - TZ=Etc/UTC
       - JELLYFIN_PublishedServerUrl=192.168.0.29 #optional
+      - device=/dev/dri:/dev/dri
+      - DOCKER_MODS=linuxserver/mods:jellyfin-opencl-intel
     volumes:
       - /data/docker/jelly/library:/config
       - /data/docker/jelly/tvseries:/data/tvshows
