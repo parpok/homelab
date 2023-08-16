@@ -1,7 +1,7 @@
 # ChatGPT said that 1 compose file is OK and 1 config file that just runs the config is easy to use
 
 ---
-version: "1"
+version: "3"
 services:
   syncthing:
     image: lscr.io/linuxserver/syncthing:latest
@@ -30,3 +30,14 @@ services:
         - /data/docker/portainer:/data
         - /var/run/docker.sock:/var/run/docker.sock
     restart: unless-stopped
+  gitea:
+    image: gitea/gitea:1.20.2-rootless
+    restart: always
+    volumes:
+      - /data/docker/gitea/data:/var/lib/gitea
+      - /data/docker/gitea/config:/etc/gitea
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - "3000:3000"
+      - "2222:2222"
