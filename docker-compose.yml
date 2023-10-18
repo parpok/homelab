@@ -1,8 +1,9 @@
 # ChatGPT said that 1 compose file is OK and 1 config file that just runs the config is easy to use
 
 ---
-version: "3"
+version: "4"
 services:
+  
   syncthing:
     image: lscr.io/linuxserver/syncthing:latest
     container_name: syncthing
@@ -22,6 +23,7 @@ services:
       - 21027:21027/udp
     restart: unless-stopped
       # Syncthing so my notes, memes and other things are synced accross my Desktop and Laptop. Can annyone tell me about a good free client for SyncThing on iOS?
+  
   portainer:
     image: portainer/portainer-ce:latest
     ports:
@@ -31,6 +33,7 @@ services:
         - /var/run/docker.sock:/var/run/docker.sock
     restart: unless-stopped
      # Portainer to have deeper look into containers.
+  
   gitea:
     image: gitea/gitea:latest-rootless #Replace the image with a lastest tag
     restart: always
@@ -43,27 +46,3 @@ services:
       - "3000:3000"
       - "2222:2222"
      # Gitea for git where I don't want to post it on GitHub.
-
-  transmission:
-    image: lscr.io/linuxserver/transmission:latest
-    container_name: transmission
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Etc/UTC
-      - TRANSMISSION_WEB_HOME= #optional
-      - USER= #optional
-      - PASS= #optional
-      - WHITELIST= #optional
-      - PEERPORT= #optional
-      - HOST_WHITELIST= #optional
-    volumes:
-      - /data/docker/Transmission/data:/config
-      - /data/docker/Transmission/downloads:/downloads
-      - /data/docker/Transmission/watch:/watch
-    ports:
-      - 9091:9091
-      - 51413:51413
-      - 51413:51413/udp
-    restart: unless-stopped
-     # Transmission for torrents. I don't use it much but it's nice to have it. + it's easier to store ISOs
