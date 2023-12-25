@@ -1,0 +1,13 @@
+---
+packages:
+- vim
+- git
+- htop
+- neofetch
+- epel-release
+- ufw 
+- smb 
+
+task:
+- ./Tasks/ping.yml
+- ./Tasks/installStuff.yml
