@@ -1,0 +1,11 @@
+---
+- name: Create Folder in Root Directory
+  hosts: Hoelab
+  become: true
+
+  tasks:
+    - name: Create Folder
+      ansible.builtin.file:
+        path: "/data"  # Specify the desired folder path
+        state: directory
+        mode: "0777"

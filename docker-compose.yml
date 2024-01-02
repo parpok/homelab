@@ -1,0 +1,24 @@
+# ChatGPT said that 1 compose file is OK and 1 config file that just runs the config is easy to use
+---
+version: "5"
+services:
+  syncthing:
+    image: lscr.io/linuxserver/syncthing:latest
+    container_name: syncthing
+    hostname: syncthing #optional
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - /data/docker/Sync/config:/config
+      - /data/docker/Sync/data1:/data1
+      - /data/docker/Sync/data2:/data2
+    ports:
+      - 8384:8384
+      - 22000:22000/tcp
+      - 22000:22000/udp
+      - 21027:21027/udp
+    restart:
+      unless-stopped
+      # Syncthing so my notes, memes and other things are synced accross my Desktop and Laptop. Can annyone tell me about a good free client for SyncThing on iOS?
