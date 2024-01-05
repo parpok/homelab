@@ -1,9 +1,0 @@
----
-- name: Make it all work
-  hosts: Hoelab
-  become: true
-  vars_files:
-    - vars.yml
-  tasks:
-    - name: DO THE THINGS
-      ansible.builtin.include_tasks: "{{ tasks }}"
