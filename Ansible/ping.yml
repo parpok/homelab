@@ -1,0 +1,6 @@
+---
+- name: Ping
+  hosts: hoelab
+  tasks:
+    - name: Run Ping
+      ansible.builtin.ping:

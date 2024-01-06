@@ -1,0 +1,35 @@
+---
+- name: Setup folders for containers and samba
+  hosts: hoelab
+  become: true
+
+  vars:
+    containerpaths:
+      - /srv/Sync/config
+      - /srv/Sync/data1
+      - /srv/Sync/data2
+
+    sambapaths:
+      - /srv/smb/time_machine
+      - /srv/smb/public
+      - /srv/smb/jenot_share
+
+
+  tasks:
+    - name: Create folder for containers
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+        owner: 1000
+        group: 1000
+        mode: "0755"
+      loop: "{{ containerpaths }}"
+
+    - name: Create folder for samba
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+        owner: 1000
+        group: 1000
+        mode: "0755"
+      loop: "{{ sambapaths }}"

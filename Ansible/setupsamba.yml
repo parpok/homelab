@@ -1,0 +1,19 @@
+---
+- name: Setup Samba
+  hosts: hoelab
+  become: true
+  tasks:
+
+    - name: Copy config files
+      ansible.builtin.copy:
+        src: ../smb.conf
+        dest: /etc/samba/smb.conf
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: Enable Samba service
+      ansible.builtin.systemd:
+        name: smbd
+        state: started
+        enabled: true

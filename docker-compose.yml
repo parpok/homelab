@@ -11,9 +11,9 @@ services:
       - PGID=1000
       - TZ=Etc/UTC
     volumes:
-      - /data/docker/Sync/config:/config
-      - /data/docker/Sync/data1:/data1
-      - /data/docker/Sync/data2:/data2
+      - /srv/Sync/config:/config
+      - /srv/Sync/data1:/data1
+      - /srv/Sync/data2:/data2
     ports:
       - 8384:8384
       - 22000:22000/tcp
