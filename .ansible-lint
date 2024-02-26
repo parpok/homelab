@@ -1,5 +1,6 @@
 ---
-profile: safety
+profile: basic
 
 exclude_paths:
   - '*/**'
+  - 'docker-compose.yml'
