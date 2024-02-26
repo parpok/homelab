@@ -3,36 +3,44 @@
   hosts: hoelab
   become: true
   tasks:
+    - name: Enable UFW
+      community.general.ufw:
+        state: enabled
 
-   - name: Enable UFW
-     community.general.ufw:
-      state: enabled
+    - name: Allow SSH
+      community.general.ufw:
+        rule: allow
+        port: "22"
 
-   - name: Allow SSH
-     community.general.ufw:
-      rule: allow
-      port: '22'
+    - name: Allow SyncThing
+      community.general.ufw:
+        rule: allow
+        port: "{{ item }}"
+      loop:
+        - "22000"
+        - "21027"
+        - "8384"
 
-   - name: Allow SyncThing
-     community.general.ufw:
-      rule: allow
-      port: "{{ item }}"
-     loop:
-      - '22000'
-      - '21027'
-      - '8384'
+    - name: Allow Samba
+      community.general.ufw:
+        rule: allow
+        port: "{{ item.port }}"
+        proto: "{{ item.proto }}"
+      loop:
+        - { port: "137", proto: "udp" }
+        - { port: "138", proto: "udp" }
+        - { port: "139", proto: "tcp" }
+        - { port: "445", proto: "tcp" }
 
-   - name: Allow Samba
-     community.general.ufw:
-      rule: allow
-      port: "{{ item.port }}"
-      proto: "{{ item.proto }}"
-     loop:
-      - { port: '137', proto: 'udp' }
-      - { port: '138', proto: 'udp' }
-      - { port: '139', proto: 'tcp' }
-      - { port: '445', proto: 'tcp' }
+    - name: Allow NGINX
+      community.general.ufw:
+        rule: allow
+        port: "{{ item.port }}"
+        proto: "{{ item.proto }}"
+      loop:
+        - { port: "80", proto: "tcp" }
+        - { port: "443", proto: "tcp" }
 
-   - name: Restart the firewall just in case
-     community.general.ufw:
-      state: reloaded
+    - name: Restart the firewall just in case
+      community.general.ufw:
+        state: reloaded
