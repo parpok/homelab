@@ -1,6 +1,6 @@
 ---
-- name: Setup firewalls
-  hosts: hoelab
+- name: Setup firewalls on storage
+  hosts: hoelab:storage
   become: true
   tasks:
     - name: Enable UFW
@@ -40,6 +40,23 @@
       loop:
         - { port: "80", proto: "tcp" }
         - { port: "443", proto: "tcp" }
+
+    - name: Restart the firewall just in case
+      community.general.ufw:
+        state: reloaded
+
+- name: Setup firewalls on infra
+  hosts: hoelab:infra
+  become: true
+  tasks:
+    - name: Enable UFW
+      community.general.ufw:
+        state: enabled
+
+    - name: Allow SSH
+      community.general.ufw:
+        rule: allow
+        port: "22"
 
     - name: Restart the firewall just in case
       community.general.ufw:
