@@ -1,6 +1,6 @@
 ---
 - name: Setup folders for containers and samba
-  hosts: hoelab:storage
+  hosts: storage
   become: true
 
   vars:

@@ -1,6 +1,6 @@
 ---
 - name: Setup firewalls on storage
-  hosts: hoelab:storage
+  hosts: storage
   become: true
   tasks:
     - name: Enable UFW
@@ -46,7 +46,7 @@
         state: reloaded
 
 - name: Setup firewalls on infra
-  hosts: hoelab:infra
+  hosts: infra
   become: true
   tasks:
     - name: Enable UFW

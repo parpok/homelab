@@ -1,6 +1,6 @@
 ---
 - name: Install packages and maintain them on storage host
-  hosts: hoelab:storage
+  hosts: storage
   become: true
 
   vars:
@@ -36,7 +36,7 @@
         cache_valid_time: 3600
 
 - name: Install packages and maintain them on infra host
-  hosts: hoelab:storage
+  hosts: infra
   become: true
 
   vars:

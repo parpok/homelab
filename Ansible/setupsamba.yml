@@ -1,6 +1,6 @@
 ---
 - name: Setup Samba
-  hosts: hoelab:storage
+  hosts: storage
   become: true
   tasks:
 
