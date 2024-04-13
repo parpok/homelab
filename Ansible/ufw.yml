@@ -56,7 +56,12 @@
     - name: Allow SSH
       community.general.ufw:
         rule: allow
-        port: "22"
+        name: "OpenSSH"
+
+    - name: Allow NGINX Full
+      comunity.general.ufw:
+        rule: allow
+        name: "Nginx Full"
 
     - name: Restart the firewall just in case
       community.general.ufw:

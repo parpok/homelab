@@ -1,47 +1,26 @@
 ## infra bratku
 
-version: "3"
-
-networks:
-  gitea:
-    external: false
-
+version: '3.6'
 services:
-  server:
-    image: gitea/gitea:1.21.7
-    container_name: gitea
-    environment:
-      - USER_UID=1000
-      - USER_GID=1000
-      - GITEA__database__DB_TYPE=mysql
-      - GITEA__database__HOST=db:3306
-      - GITEA__database__NAME=gitea
-      - GITEA__database__USER=${GITEA_database_USER}
-      - GITEA__database__PASSWD=${GITEA_database_PASSWD}
+  gitlab:
+    image: gitlab/gitlab-ce:latest
+    container_name: gitlab
     restart: always
-    networks:
-      - gitea
-    volumes:
-      - /srv/gitea/data:/data
-      - /etc/timezone:/etc/timezone:ro
-      - /etc/localtime:/etc/localtime:ro
+    hostname: 'git.parpok.xyz'
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        # Add any other gitlab.rb configuration here, each on its own line
+        external_url 'http://git.parpok.xyz:8000'
+        gitlab_rails['gitlab_shell_ssh_port'] = 2424
     ports:
-      - "3000:3000"
-      - "222:22"
-    depends_on:
-      - db
-
-  db:
-    image: mysql:8
-    restart: always
-    environment:
-      - MYSQL_ROOT_PASSWORD=${mySQL_root_PASSWD}
-      - MYSQL_USER=${GITEA_database_USER}
-      - MYSQL_PASSWORD=${GITEA_database_PASSWD}
-      - MYSQL_DATABASE=gitea
-    networks:
-      - gitea
+      - '8000:8000'
+      - '443:443'
+      - '2424:2424'
     volumes:
-      - /srv/gitea/db:/var/lib/mysql
+      - '$GITLAB_HOME/config:/etc/gitlab'
+      - '$GITLAB_HOME/logs:/var/log/gitlab'
+      - '$GITLAB_HOME/data:/var/opt/gitlab'
+    shm_size: '256m'
+
 
 # Make ur own secrets
