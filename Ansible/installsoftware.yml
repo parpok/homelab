@@ -11,6 +11,7 @@
       - htop
       - ufw
       - samba
+      - libsensors-dev
 
   tasks:
     - name: Check updates
@@ -46,6 +47,8 @@
       - neofetch
       - htop
       - ufw
+      - libsensors-dev
+
 
   tasks:
     - name: Check updates
