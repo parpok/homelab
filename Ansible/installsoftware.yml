@@ -48,6 +48,7 @@
       - htop
       - ufw
       - libsensors-dev
+      - nginx
 
 
   tasks:

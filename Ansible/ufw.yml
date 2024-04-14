@@ -59,7 +59,7 @@
         name: "OpenSSH"
 
     - name: Allow NGINX Full
-      comunity.general.ufw:
+      community.general.ufw:
         rule: allow
         name: "Nginx Full"
 
