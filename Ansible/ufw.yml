@@ -32,37 +32,8 @@
         - { port: "139", proto: "tcp" }
         - { port: "445", proto: "tcp" }
 
-    - name: Allow NGINX
-      community.general.ufw:
-        rule: allow
-        port: "{{ item.port }}"
-        proto: "{{ item.proto }}"
-      loop:
-        - { port: "80", proto: "tcp" }
-        - { port: "443", proto: "tcp" }
-
     - name: Restart the firewall just in case
       community.general.ufw:
         state: reloaded
 
-- name: Setup firewalls on infra
-  hosts: infra
-  become: true
-  tasks:
-    - name: Enable UFW
-      community.general.ufw:
-        state: enabled
-
-    - name: Allow SSH
-      community.general.ufw:
-        rule: allow
-        name: "OpenSSH"
-
-    - name: Allow NGINX Full
-      community.general.ufw:
-        rule: allow
-        name: "Nginx Full"
-
-    - name: Restart the firewall just in case
-      community.general.ufw:
-        state: reloaded
+        

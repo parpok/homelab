@@ -1,4 +1,3 @@
-# ChatGPT said that 1 compose file is OK and 1 config file that just runs the config is easy to use
 ---
 version: "3"
 services:
